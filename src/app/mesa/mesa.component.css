@@ -1,0 +1,52 @@
+.mesas {
+	padding: 20px;
+}
+
+.mesa {
+  	width: 330px;
+  	min-height: 150px;
+	margin: 10px;
+	display: inline-block;
+	vertical-align: top;
+  	position: relative;
+  	background-color: white;
+}
+
+.mesa.new {
+	background-color: #ddd;
+	color: #888;
+  	cursor: pointer;
+}
+
+.mesa-status {
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+	top: 15px;
+	left: 15px;
+	background-color: #c0392b;
+	position: absolute;
+}
+
+.mesa-menu {
+	color: #888;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}
+
+.mesa-title {
+	text-align: center;
+	padding-bottom: 30px;
+}
+
+.mesa-circle{
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    font-size: 22px;
+    line-height: 50px;
+    border-radius: 60px;
+    text-align: center;
+    background: #ddd;
+}
