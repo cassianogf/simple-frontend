@@ -4,11 +4,18 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Step 1: Minimum system requirements
 
-Verify that you are running at least node 6.9.x and npm 3.x.x by running node -v and npm -v in a terminal/console window. Older versions produce errors, but newer versions are fine.
+Verify that you are running at least node 6.9.x, npm 3.x.x and ng 1.x.x by running node -v, npm -v and ng -v in a terminal/console window. Older versions produce errors, but newer versions are fine.
+
+To install ng (@angular/cli) open a terminal window then run
+
+```
+npm install -g @angular/cli
+```
+
 
 ## Step 2: Installation
 
-Open a terminal window and, go to the project directory then run
+Open a terminal window, go to the project directory then run
 
 ```
 npm install
