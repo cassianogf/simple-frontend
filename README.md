@@ -12,10 +12,9 @@ To install ng (@angular/cli) open a terminal window then run
 npm install -g @angular/cli
 ```
 
-
 ## Step 2: Installation
 
-Open a terminal window, go to the project directory then run
+In the project directory install the dependencies by running:
 
 ```
 npm install
