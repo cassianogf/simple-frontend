@@ -2,9 +2,25 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.1.3.
 
-## Manual de instalação
+## Step 1: Minimum system requirements
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Verify that you are running at least node 6.9.x and npm 3.x.x by running node -v and npm -v in a terminal/console window. Older versions produce errors, but newer versions are fine.
+
+## Step 2: Installation
+
+Open a terminal window and, go to the project directory then run
+
+```
+npm install
+```
+
+## Step 3: Serve the application
+
+Launch the server
+
+```
+ng serve --open
+```
 
 ## Further help
 
