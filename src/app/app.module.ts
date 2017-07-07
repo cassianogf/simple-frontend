@@ -6,6 +6,8 @@ import { MdButtonModule, MdCheckboxModule, MdToolbarModule, MdCardModule, MdMenu
  MdSidenavModule, MdDialogModule, MdInputModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { SimpleNotificationsModule, NotificationsService } from 'angular2-notifications';
+
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing-module'
 
@@ -29,8 +31,9 @@ import { FuncionarioService } from './funcionario/funcionario.service'
 
 export function httpServiceFactory(backend: XHRBackend,
     options: RequestOptions,
-    router: Router) {
-  return new HttpService(backend, options, router);
+    router: Router,
+    service: NotificationsService) {
+  return new HttpService(backend, options, router, service);
 }
 
 @NgModule({
@@ -47,6 +50,7 @@ export function httpServiceFactory(backend: XHRBackend,
     MdInputModule,
     HttpModule,
     FormsModule,
+    SimpleNotificationsModule.forRoot(),
     BrowserAnimationsModule
   ],
   declarations: [
@@ -66,7 +70,7 @@ export function httpServiceFactory(backend: XHRBackend,
     {
       provide: HttpService,
       useFactory: httpServiceFactory,
-      deps: [XHRBackend, RequestOptions, Router]
+      deps: [XHRBackend, RequestOptions, Router, NotificationsService]
     },
   ],
   bootstrap: [AppComponent]
