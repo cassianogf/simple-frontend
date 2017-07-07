@@ -1,0 +1,16 @@
+<div class="content">
+  <h1 class="text-grey">Novo Funcionário</h1>
+  <button md-raised-button  routerLink="/funcionarios">Cancelar</button>
+
+	<form class="example-form" (ngSubmit)="onSubmit()" #customerForm="ngForm">
+	    <md-input-container class="example-full-width">
+	      <input mdInput name="name" [(ngModel)]="model.name" placeholder="Nome" required="">
+	    </md-input-container>
+
+	    <md-input-container class="example-full-width">
+	      <input type="number" mdInput name="telephone" [(ngModel)]="model.telephone" placeholder="Telefone" required="">
+	    </md-input-container>
+
+	    <button md-raised-button>Salvar</button>
+	</form>
+</div>

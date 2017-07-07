@@ -1,7 +1,9 @@
 import { BrowserModule,  } from '@angular/platform-browser';
 import { NgModule,  } from '@angular/core';
 import { Router } from '@angular/router'
-import { MdButtonModule, MdCheckboxModule, MdToolbarModule, MdCardModule, MdMenuModule, MdIconModule } from '@angular/material';
+import { FormsModule }   from '@angular/forms';
+import { MdButtonModule, MdCheckboxModule, MdToolbarModule, MdCardModule, MdMenuModule, MdIconModule,
+ MdSidenavModule, MdDialogModule, MdInputModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
@@ -14,6 +16,16 @@ import { Database } from './config/database'
 
 import { MesaComponent } from './mesa/mesa.component'
 import { MesaService } from './mesa/mesa.service'
+
+import { ProdutoComponent } from './produto/produto.component'
+import { ProdutoFormComponent } from './produto/produto-form.component'
+import { ProdutoService } from './produto/produto.service'
+
+import { FuncionarioComponent } from './funcionario/funcionario.component'
+import { FuncionarioFormComponent } from './funcionario/funcionario-form.component'
+import { FuncionarioService } from './funcionario/funcionario.service'
+
+
 
 export function httpServiceFactory(backend: XHRBackend,
     options: RequestOptions,
@@ -30,16 +42,27 @@ export function httpServiceFactory(backend: XHRBackend,
     MdCardModule,
     MdMenuModule,
     MdIconModule,
+    MdSidenavModule,
+    MdDialogModule,
+    MdInputModule,
     HttpModule,
+    FormsModule,
     BrowserAnimationsModule
   ],
   declarations: [
     AppComponent,
     MesaComponent,
+    ProdutoComponent,
+    ProdutoFormComponent,
+    FuncionarioComponent,
+    FuncionarioFormComponent,
+
   ],
   providers: [
     Database,
     MesaService,
+    FuncionarioService,
+    ProdutoService,
     {
       provide: HttpService,
       useFactory: httpServiceFactory,

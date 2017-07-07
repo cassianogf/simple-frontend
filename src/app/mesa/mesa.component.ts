@@ -12,8 +12,7 @@ import { MesaService } from './mesa.service'
 })
 
 export class MesaComponent {
-	mesas: Mesa[] = []
-	_mesas: Observable<Mesa[]> 
+	mesas: Observable<Mesa[]> 
 
 	open(mesa: Mesa) {
 		mesa.status = 'bus'
@@ -36,12 +35,15 @@ export class MesaComponent {
 
 	create() {
 		let mesa: Mesa = new Mesa()
-		mesa.id = this.mesas.length + 1
-		mesa.name = String(this.mesas.length + 1)
+		mesa.name =	String(this.mesaService.getMesasLength())
 		mesa.status = 'fre'
 		mesa.capacity = 1;
 		this.mesaService.create(mesa)
 	} 
+
+	reorder() {
+		this.mesaService.reorder()
+	}
 
 	isFree(mesa: Mesa) {
 		if(mesa.status == 'fre')
@@ -74,7 +76,7 @@ export class MesaComponent {
 		}
 	}
 	ngOnInit(){
-		this._mesas = this.mesaService.mesas
+		this.mesas = this.mesaService.mesas
 		this.mesaService.load()
 	}
 

@@ -1,33 +1,36 @@
-<div class="mesas" style="background-color: #ddd; height: 100%">
-  <md-card class="mesa" *ngFor="let mesa of _mesas | async">
-    <md-card-content>
-      <div class="mesa-status" [style.background]="getStatusBackground(mesa.status)"></div>
-      <p class="mesa-title"><span class="mesa-circle">{{ mesa.id }}</span></p>
-
-      <button md-icon-button class="mesa-menu" [mdMenuTriggerFor]="menu">
-        <md-icon>more_vert</md-icon>
-      </button>
-      <md-menu #menu="mdMenu">
-        <button md-menu-item (click)="remove(mesa)">
-          <span>Remover</span>
-        </button>
-      </md-menu>
-    </md-card-content>
-    <md-card-actions>
-      <button md-button *ngIf="isFree(mesa) || isReserved(mesa)"  (click)="open(mesa)">ABRIR</button>
-      <button md-button *ngIf="isFree(mesa)"  (click)="reserve(mesa)">RESERVAR</button>
-      <button md-button *ngIf="!isFree(mesa)" (click)="close(mesa)">FECHAR</button>
-      <button md-button *ngIf="isBusy(mesa)"  (click)="openProductsDialog()">PRODUTOS</button>
-    </md-card-actions>
-  </md-card>
-  
-  <md-card class="mesa new" (click)="create()">
-    <md-card-content>
-      <p style="text-align: center; font-size: 48px; margin: 0">+</p>
-      <p style="text-align: center; margin: 0;">Nova Mesa</p>
-    </md-card-content>
-    <md-card-actions>
-    </md-card-actions>
-  </md-card>
-
+<div class="content">
+  <h1 class="text-grey">Mesas</h1>
+  <button md-raised-button (click)="reorder()">Reordenar</button>
 </div>
+  <div class="mesas" style="background-color: #ddd;">
+    <md-card class="mesa" *ngFor="let mesa of mesas | async">
+      <md-card-content>
+        <div class="mesa-status" [style.background]="getStatusBackground(mesa.status)"></div>
+        <p class="mesa-title"><span class="mesa-circle">{{ mesa.name }}</span></p>
+
+        <button md-icon-button class="mesa-menu" [mdMenuTriggerFor]="menu">
+          <md-icon>more_vert</md-icon>
+        </button>
+        <md-menu #menu="mdMenu">
+          <button md-menu-item (click)="remove(mesa)">
+            <span>Remover</span>
+          </button>
+        </md-menu>
+      </md-card-content>
+      <md-card-actions>
+        <button md-button *ngIf="isFree(mesa) || isReserved(mesa)"  (click)="open(mesa)">ABRIR</button>
+        <button md-button *ngIf="isFree(mesa)"  (click)="reserve(mesa)">RESERVAR</button>
+        <button md-button *ngIf="isBusy(mesa)" (click)="close(mesa)">FECHAR</button>
+        <button md-button *ngIf="isReserved(mesa)" (click)="close(mesa)">LIBERAR RESERVA</button>
+      </md-card-actions>
+    </md-card>
+    
+    <md-card class="mesa new" (click)="create()">
+      <md-card-content>
+        <p style="text-align: center; font-size: 48px; margin: 0">+</p>
+        <p style="text-align: center; margin: 0;">Nova Mesa</p>
+      </md-card-content>
+      <md-card-actions>
+      </md-card-actions>
+    </md-card>
+  </div>

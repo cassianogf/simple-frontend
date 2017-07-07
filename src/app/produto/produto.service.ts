@@ -6,27 +6,27 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import 'rxjs/add/operator/toPromise';
 
-import { Mesa } from './mesa'
+import { Produto } from './produto'
 
 import { HttpService } from '../helpers/http.service'
 import { Database } from '../config/database'
 
 @Injectable()
-export class MesaService {
-  mesas: Observable<Mesa[]>
-  private _mesas: BehaviorSubject<Mesa[]>;
+export class ProdutoService {
+  produtos: Observable<Produto[]>
+  private _produtos: BehaviorSubject<Produto[]>;
   private baseUrl: string;
   private dataStore: {
-    mesas: Mesa[]
+    produtos: Produto[]
   }
 
   constructor(private http: HttpService,
               private database: Database,
     ) {
     this.baseUrl = this.database.URL
-    this.dataStore = { mesas: [] }
-    this._mesas = <BehaviorSubject<Mesa[]>>new BehaviorSubject([])
-    this.mesas = this._mesas.asObservable();
+    this.dataStore = { produtos: [] }
+    this._produtos = <BehaviorSubject<Produto[]>>new BehaviorSubject([])
+    this.produtos = this._produtos.asObservable();
   }
 
   //================================================================================================
@@ -34,28 +34,28 @@ export class MesaService {
   //================================================================================================
 
   load() {
-    this.http.get(`${this.baseUrl}/mesas`).map(response => response.json()).subscribe(data => {
-      this.dataStore.mesas = data;
-      this._mesas.next(Object.assign({}, this.dataStore).mesas);
-    }, error => console.log('Could not load mesas.'));
+    this.http.get(`${this.baseUrl}/produtos`).map(response => response.json()).subscribe(data => {
+      this.dataStore.produtos = data;
+      this._produtos.next(Object.assign({}, this.dataStore).produtos);
+    }, error => console.log('Could not load produtos.'));
   }
 
-  create(mesa: Mesa): Promise<Mesa> {
+  create(produto: Produto): Promise<Produto> {
 
     return this.http
-      .post(`${this.baseUrl}/mesas`, JSON.stringify(mesa))
+      .post(`${this.baseUrl}/produtos`, JSON.stringify(produto))
       .toPromise()
       .then(res => {
-        this.dataStore.mesas.push(res.json());
-        this._mesas.next(Object.assign({}, this.dataStore).mesas);
+        this.dataStore.produtos.push(res.json());
+        this._produtos.next(Object.assign({}, this.dataStore).produtos);
         return res.json()
       })
       .catch(err => this.handleError(err));
   }
 
-  update(mesa: Mesa): Promise<Mesa> {
+  update(produto: Produto): Promise<Produto> {
     return this.http
-      .put(`${this.baseUrl}/mesas/${mesa.id}`, JSON.stringify(mesa))
+      .put(`${this.baseUrl}/produtos/${produto.id}`, JSON.stringify(produto))
       .toPromise()
       .then(res => {
         return res.json()
@@ -63,24 +63,24 @@ export class MesaService {
       .catch(err => this.handleError(err));
   }
 
-  remove(mesaId: number): Promise<boolean> {
+  remove(produtoId: number): Promise<boolean> {
     return this.http
-      .delete(`${this.baseUrl}/mesas/${mesaId}`)
+      .delete(`${this.baseUrl}/produtos/${produtoId}`)
       .toPromise()
       .then(response => {
-        this.dataStore.mesas.forEach((t, i) => {
-          if (t.id === mesaId) { this.dataStore.mesas.splice(i, 1); }
+        this.dataStore.produtos.forEach((t, i) => {
+          if (t.id === produtoId) { this.dataStore.produtos.splice(i, 1); }
         });
 
-        this._mesas.next(Object.assign({}, this.dataStore).mesas);
+        this._produtos.next(Object.assign({}, this.dataStore).produtos);
         return true;
       })
       .catch(err => this.handleError(err));
   }
 
-  show(id: number): Promise<Mesa> {
+  show(id: number): Promise<Produto> {
     return this.http 
-      .get(`${this.baseUrl}/mesas/${id}`)
+      .get(`${this.baseUrl}/produtos/${id}`)
       .toPromise()
       .then(res => {
         return res.json()
@@ -89,15 +89,15 @@ export class MesaService {
   }
 
   reorder() {
-    return this.http.post(`${this.baseUrl}/mesas/reorder`, JSON.stringify({})).toPromise()
+    return this.http.post(`${this.baseUrl}/produtos/reorder`, JSON.stringify({})).toPromise()
     .then(response => {
       this.load()
     })
     .catch(err => this.handleError(err))
   }
 
-  getMesasLength() {
-    return this.dataStore.mesas.length + 1
+  getProdutosLength() {
+    return this.dataStore.produtos.length + 1
   }
 
   handleError(error: any): Promise<any> {

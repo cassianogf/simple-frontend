@@ -1,0 +1,21 @@
+<div class="content">
+  <h1 class="text-grey">Funcionarios</h1>
+  <button md-raised-button  routerLink="/funcionarios/novo">+ Novo</button>
+</div>
+
+<div class="content-block bg-white">
+  <table class="table">
+  	<thead>
+  		<th>Nome</th>
+  		<th>Telefone</th>
+  		<th>Criado em</th>
+  		<th class="text-right">Ação</th>
+  	</thead>
+    <tr *ngFor="let funcionario of funcionarios | async">
+      <td (click)="edit(funcionario)" style="color: #2980b9; cursor: pointer;">{{ funcionario.name }}</td>
+      <td>{{ funcionario.telephone }}</td>
+      <td>{{ funcionario.created_at | date:short }}</td>
+      <td class="text-right" (click)="remove(funcionario)" style="cursor: pointer;"><md-icon>delete</md-icon></td>
+    </tr>
+  </table>
+</div>
